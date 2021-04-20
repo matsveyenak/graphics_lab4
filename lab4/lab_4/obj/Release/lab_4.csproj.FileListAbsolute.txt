@@ -1,0 +1,14 @@
+D:\CG\lab_4\lab_4\lab_4\bin\Release\lab_4.exe.config
+D:\CG\lab_4\lab_4\lab_4\bin\Release\lab_4.exe
+D:\CG\lab_4\lab_4\lab_4\bin\Release\lab_4.pdb
+D:\CG\lab_4\lab_4\lab_4\obj\Release\MainWindow.g.cs
+D:\CG\lab_4\lab_4\lab_4\obj\Release\App.g.cs
+D:\CG\lab_4\lab_4\lab_4\obj\Release\lab_4_MarkupCompile.cache
+D:\CG\lab_4\lab_4\lab_4\obj\Release\lab_4_MarkupCompile.lref
+D:\CG\lab_4\lab_4\lab_4\obj\Release\MainWindow.baml
+D:\CG\lab_4\lab_4\lab_4\obj\Release\lab_4.g.resources
+D:\CG\lab_4\lab_4\lab_4\obj\Release\lab_4.Properties.Resources.resources
+D:\CG\lab_4\lab_4\lab_4\obj\Release\lab_4.csproj.GenerateResource.cache
+D:\CG\lab_4\lab_4\lab_4\obj\Release\lab_4.csproj.CoreCompileInputs.cache
+D:\CG\lab_4\lab_4\lab_4\obj\Release\lab_4.exe
+D:\CG\lab_4\lab_4\lab_4\obj\Release\lab_4.pdb

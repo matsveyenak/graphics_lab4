@@ -25,41 +25,71 @@ namespace lab_4
         private static int middleX = 0, middleY = 0;
         private static int w, h, offset = 30;
         private static HashSet<(int, int)> dots = new HashSet<(int, int)>();
+        private int[] initParameters(int mode)
+        {
+            int x1, x2, y1, y2, r;
+            if (mode == 0)
+            {
+                if (!int.TryParse(text_x1.Text, out x1))
+                    MessageBox.Show("Please enter integer values", "Warning");
+                if (!int.TryParse(text_x2.Text, out x2))
+                    MessageBox.Show("Please enter integer values", "Warning");
+                if (!int.TryParse(text_y1.Text, out y1))
+                    MessageBox.Show("Please enter integer values", "Warning");
+                if (!int.TryParse(text_y2.Text, out y2))
+                    MessageBox.Show("Please enter integer values", "Warning");
+
+                return new int[] { x1, x2, y1, y2 };
+            }
+            else;
+            {
+                if (!int.TryParse(text_x1.Text, out x1))
+                    MessageBox.Show("Please enter integer values", "Warning");
+                if (!int.TryParse(text_y1.Text, out y1))
+                    MessageBox.Show("Please enter integer values", "Warning");
+                if (!int.TryParse(text_r.Text, out r))
+                    MessageBox.Show("Please enter integer values", "Warning");
+
+                return new int[] { x1, y1, r };
+            }
+        }
         private void stepButton_Click(object sender, RoutedEventArgs e)
         {
-            int x1 = Convert.ToInt32(text_x1.Text), x2 = Convert.ToInt32(text_x2.Text);
-            int y1 = Convert.ToInt32(text_y1.Text), y2 = Convert.ToInt32(text_y2.Text);
+            int[] param = initParameters(0);
+            int x1 = param[0], x2 = param[1], y1 = param[2], y2 = param[3];
 
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
             dots.Clear();
 
-            if (y1 >= y2)
-                swap(ref y1, ref y2);
+            var steep = Math.Abs(y2 - y1) > Math.Abs(x2 - x1);
+            if (steep)
+            {
+                swap(ref x1, ref y1);
+                swap(ref x2, ref y2);
+            }
 
             if (x1 > x2)
+            {
                 swap(ref x1, ref x2);
+                swap(ref y1, ref y2);
+            }
 
             if (x1 == x2)
             {
-                for (int i = x1; i <= x2; i++)
-                    dots.Add((x1, i));
+                for (int i = y1; i <= y2; i++)
+                    dots.Add((x1, -i));
             }
             else
             {
-                double k = ((double)y1 - y2) / (x1 - x2);
+                double k = (1.0 * y2 - y1) / (x2 - x1);
                 double b = y1 - k * x1;
 
-                if (Math.Abs(k) >= 1)
+                for (int i = x1; i <= x2; i++)
                 {
-                    for (int i = y1; i <= y2; i++)
-                        dots.Add(((int)Math.Round(k * i + b), -i));
-                }
-                else
-                {
-                    for (int i = x1; i <= x2; i++)
-                        dots.Add((i, -(int)Math.Round(k * i + b)));
+                    int Y = (int)Math.Round(k * i + b);
+                    dots.Add((steep ? Y : i, steep ? -i : -Y));
                 }
             }
             stopwatch.Stop();
@@ -72,8 +102,8 @@ namespace lab_4
 
         private void ddaButton_Click(object sender, RoutedEventArgs e)
         {
-            int x1 = Convert.ToInt32(text_x1.Text), x2 = Convert.ToInt32(text_x2.Text);
-            int y1 = Convert.ToInt32(text_y1.Text), y2 = Convert.ToInt32(text_y2.Text);
+            int[] param = initParameters(0);
+            int x1 = param[0], x2 = param[1], y1 = param[2], y2 = param[3];
 
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -116,8 +146,8 @@ namespace lab_4
 
         private void lineButton_Click(object sender, RoutedEventArgs e)
         {
-            int x1 = Convert.ToInt32(text_x1.Text), x2 = Convert.ToInt32(text_x2.Text);
-            int y1 = Convert.ToInt32(text_y1.Text), y2 = Convert.ToInt32(text_y2.Text);
+            int[] param = initParameters(0);
+            int x1 = param[0], x2 = param[1], y1 = param[2], y2 = param[3];
 
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -166,8 +196,8 @@ namespace lab_4
 
         private void circleButton_Click(object sender, RoutedEventArgs ee)
         {
-            int x1 = Convert.ToInt32(text_x1.Text), y1 = -Convert.ToInt32(text_y1.Text);
-            int r = Convert.ToInt32(text_r.Text);
+            int[] param = initParameters(1);
+            int x1 = param[0], y1 = -param[1], r = param[2];
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
@@ -311,7 +341,7 @@ namespace lab_4
 
                 Line line = new Line()
                 {
-                    Stroke = new SolidColorBrush(Colors.Black),
+                    Stroke = new SolidColorBrush(Colors.DarkViolet),
                     StrokeThickness = 2,
                     X1 = X,
                     Y1 = offset,
@@ -328,7 +358,7 @@ namespace lab_4
 
                 Line line = new Line()
                 {
-                    Stroke = new SolidColorBrush(Colors.Black),
+                    Stroke = new SolidColorBrush(Colors.DarkViolet),
                     StrokeThickness = 2,
                     X1 = offset,
                     Y1 = Y,
